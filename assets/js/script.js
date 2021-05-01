@@ -18,8 +18,27 @@ $(function () {
   //Dynamically color time blocks based off time of day
 
   //FUNCTIONS
+  //function will be responsible for checking time and determining what class to add - passt, present, or future
   function checkTime() {
-    console.log("I am in the checkTime function");
+    //grab current hour using moment js
+    let currentHour = moment().hours();
+    // console.log(currentHour);
+
+    //need to grab the block hour from the HTML
+    //loop through block hours
+    $(".time-block").each(function () {
+      let blockHour = parseInt($(this).attr("id").split("-")[1]);
+      //   console.log(typeof blockHour);
+      if (blockHour < currentHour) {
+        $(this).addClass("past");
+      } else if (blockHour === currentHour) {
+        $(this).addClass("present");
+      } else {
+        $(this).addClass("future");
+      }
+    });
+
+    //check the current hour against block hour
   }
   checkTime();
   //EVENT HANDLERS
@@ -46,6 +65,4 @@ $(function () {
   $("#hour-15 .description").val(localStorage.getItem("hour-15"));
   $("#hour-16 .description").val(localStorage.getItem("hour-16"));
   $("#hour-17 .description").val(localStorage.getItem("hour-17"));
-
-  //
 });
