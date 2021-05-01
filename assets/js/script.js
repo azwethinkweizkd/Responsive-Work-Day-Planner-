@@ -1,5 +1,3 @@
-//display the current day for the calendar
-
 $(function () {
   // Write all of the jquery inside this function
 
